@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>League of Brainrots</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/battle.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/cards.js"></script>
+    <script src="/js/loot.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/progression.js"></script>
+    <script src="/js/save.js"></script>
+    <script src="/js/upgrades.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-nav flex-row">
+                <img src="/assets/images/settings.png" alt="Settings" class="img-fluid icon"
+                    onClick="clickMenuIcon(this)">
+                <img src="/assets/images/stats.png" alt="Stats" class="img-fluid icon" onClick="clickMenuIcon(this)">
+                <img src="/assets/images/map.png" alt="Map" class="img-fluid icon" onClick="clickMenuIcon(this)">
+                <img src="/assets/images/cards.png" alt="Cards" class="img-fluid icon" onClick="clickMenuIcon(this)">
+                <img src="/assets/images/store.png" alt="Store" class="img-fluid icon" onClick="clickMenuIcon(this)">
+            </div>
+        </nav>
+        <ul class="resource-list">
+            <li>
+                <p id="rot-coins"><span style="color: gold;">0</span> <img src="/assets/images/resources/rotcoin.png"
+                        alt="Rot Coin" title="Rot Coin" width="30" height="30"></p>
+            </li>
+            <li>
+                <p id="rot-shards"><span style="color:cyan;">0</span> <img src="/assets/images/resources/rotshard.png"
+                        alt="Rot Shard" title="Rot Shard" width="30" height="30"></p>
+            </li>
+            <li>
+                <p id="brainrot-essence"><span style="color: magenta;">0</span> <img
+                        src="/assets/images/resources/brainrotessence.png" alt="Brainrot Essence"
+                        title="Brainrot Essence" width="30" height="30"></p>
+            </li>
+        </ul>
+    </header>
+    <div id="stats-popup" class="popup-overlay hidden">
+        <div class="stats-popup-box">
+            <h2>Stats</h2>
+            <ul class="stats-list">
+                <li><span class="stat-label">Total Rot Coins earned:</span> <span id="stat-totalRotCoins"
+                        style="color:gold">0</span></li>
+                <li><span class="stat-label">Total Rot Coins spent:</span> <span id="stat-totalRotCoinsSpent"
+                        style="color:gold">0</span></li>
+                <li><span class="stat-label">Total Rot Shards earned:</span> <span id="stat-totalRotShards"
+                        style="color:cyan">0</span></li>
+                <li><span class="stat-label">Total Rot Shards spent:</span> <span id="stat-totalRotShardsSpent"
+                        style="color:cyan">0</span></li>
+                <li><span class="stat-label">Total Brainrot Essence earned:</span> <span id="stat-totalBrainrotEssence"
+                        style="color:magenta">0</span></li>
+                <li><span class="stat-label">Total Brainrot Essence spent:</span> <span
+                        id="stat-totalBrainrotEssenceSpent" style="color:magenta">0</span></li>
+                <li><span class="stat-label">Total Clicks:</span> <span id="stat-totalClicks"
+                        style="color:white">0</span></li>
+                <li><span class="stat-label">Time Played:</span> <span id="stat-totalTimePlayed"
+                        style="color:white">0s</span></li>
+            </ul>
+            <button class="btn btn-primary" onclick="closePopup('stats-popup')">Close</button>
+        </div>
+    </div>
+    <div id="shop-popup" class="popup-overlay hidden">
+        <div class="shop-popup-box">
+            <h2>Shop</h2>
+            <div class="row">
+                <div class="col col-md-3">
+                    <div class="shop-item">
+                        <img src="/assets/images/resources/rotcoin.png" alt="Rotcoin" title="Rotcoin">
+                        <div class="shop-item-info">
+                            <p class="shop-item-name">1000 Rotcoins</p>
+                            <div class="shop-item-price">Price: 15 Brainrot Essence</div>
+                        </div>
+                        <button class="btn btn-primary" onclick="buyItem('rotcoin', 'brainrotessence', 15)">Buy</button>
+                    </div>
+                </div>
+                <div class="col col-md-3">
+                    <div class="shop-item">
+                        <img src="/assets/images/resources/rotshard.png" alt="Rotshard" title="Rotshard">
+                        <div class="shop-item-info">
+                            <p class="shop-item-name">50 Rotshards</p>
+                            <div class="shop-item-price">Price: 500 Rotcoins </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="buyItem('rotshard', 'rotcoin', 500)">Buy</button>
+                    </div>
+                </div>
+                <div class="col col-md-3">
+                    <div class="shop-item">
+                        <img src="/assets/images/resources/brainrotessence.png" alt="Brainrot Essence"
+                            title="Brainrot Essence">
+                        <div class="shop-item-info">
+                            <p class="shop-item-name">5 Brainrot Essence</p>
+                            <div class="shop-item-price">Price: 50 Rotshards</div>
+                        </div>
+                        <button class="btn btn-primary"
+                            onclick="buyItem('brainrotessence', 'rotshard', 50)">Buy</button>
+                    </div>
+                </div>
+                <div class="col col-md-3">
+                    <div class="shop-item">
+                        <img src="/assets/images/resources/.png" alt="Rotcoin" title="Rotcoin">
+                        <div class="shop-item-info">
+                            <p class="shop-item-name">1000 Rotcoins</p>
+                            <div class="shop-item-price">Price: 10 Brainrot Essence</div>
+                        </div>
+                        <button class="btn btn-primary" onclick="buyItem('rotcoin', 10)">Buy</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-md-3">
+                    <div class="shop-item">
+                        <img src="/assets/images/resources/rotcoin.png" alt="Rotcoin" title="Rotcoin">
+                        <div class="shop-item-info">
+                            <p class="shop-item-name">1000 Rotcoins</p>
+                            <div class="shop-item-price">FREE</div>
+                        </div>
+                        <button class="btn btn-primary" onclick="buyItem('rotcoin', 10)">Watch AD</button>
+                    </div>
+                </div>
+                <div class="col col-md-3">
+                    <div class="shop-item">
+                        <img src="/assets/images/resources/rotshard.png" alt="Rotshard" title="Rotshard">
+                        <div class="shop-item-info">
+                            <p class="shop-item-name">50 Rotshards</p>
+                            <div class="shop-item-price">FREE </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="buyItem('rotshard', 10)">Watch AD</button>
+                    </div>
+                </div>
+                <div class="col col-md-3">
+                    <div class="shop-item">
+                        <img src="/assets/images/resources/brainrotessence.png" alt="Brainrot Essence"
+                            title="Brainrot Essence">
+                        <div class="shop-item-info">
+                            <p class="shop-item-name">1 Brainrot Essence</p>
+                            <div class="shop-item-price">FREE</div>
+                        </div>
+                        <button class="btn btn-primary" onclick="buyItem('brainrotessence', 10)">Watch AD</button>
+                    </div>
+                </div>
+                <div class="col col-md-3">
+                    <div class="shop-item">
+                        <img src="/assets/images/resources/rotcoin.png" alt="Rotcoin" title="Rotcoin">
+                        <div class="shop-item-info">
+                            <p class="shop-item-name"></p>
+                            <div class="shop-item-price"></div>
+                        </div>
+                        <button class="btn btn-primary" onclick="buyItem('brainrotessence', 10)"></button>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="closePopup('shop-popup')">Close</button>
+        </div>
+    </div>
+    <section class="main-content">
+        <div class="brainrot-area">
+            <p id="coinspersecond">0 Rot Coins per second</p>
+            <img src="/assets/images/brainrots/italian brainrots/tralalelo-tralala.png" alt="Brainrot"
+                class="brainrot-img" onClick="clickBrainrot(this, event)" id="brainrot-1">
+        </div>
+
+        <aside class="side-panel">
+            <h2 class="text-center">Upgrades</h2>
+            <section class="upgrade-section">
+                <div class="upgrade-container fs-6">
+                    <h6 class="upgrade-title">Brainrot clicker</h6>
+                    <p class="upgrade-description">makes your clicks 2 times more effective</p>
+                    <div class="upgrade-row">
+                        <p id="clicker-cost">Cost: 100 <span>Rot Coins</span></p>
+                        <button class="btn btn-primary text-wrap" onClick="buyUpgrade('clicker')">Buy Upgrade</button>
+                    </div>
+                </div>
+                <div class="upgrade-container fs-6">
+                    <h6 class="upgrade-title">Auto tralala</h6>
+                    <p class="upgrade-description">Generates <span id="autoTralala-rate">0</span> Rot Coins per second
+                    </p>
+                    <div class="upgrade-row">
+                        <p id="autoTralala-cost">Cost: 500 <span>Rot Coins</span></p>
+                        <button class="btn btn-primary text-wrap" onClick="buyUpgrade('autoTralala')">Buy
+                            Upgrade</button>
+                    </div>
+                </div>
+                <div class="upgrade-container fs-6">
+                    <h6 class="upgrade-title">Auto tralala</h6>
+                    <p class="upgrade-description">Generates <span id="autoTralala-rate">0</span> Rot Coins per second
+                    </p>
+                    <div class="upgrade-row">
+                        <p id="autoTralala-cost">Cost: 500 <span>Rot Coins</span></p>
+                        <button class="btn btn-primary text-wrap" onClick="buyUpgrade('autoTralala')">Buy
+                            Upgrade</button>
+                    </div>
+                </div>
+            </section>
+        </aside>
+    </section>
+</body>
+
+</html>
